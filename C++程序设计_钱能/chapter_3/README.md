@@ -1,5 +1,7 @@
 # 第三章 数据类型 (Data Types)
 
+<img src="./../img/C++程序设计-第三章 数据类型.png"/>
+
 ## 3.1 整型 (int Types)
 
 整型定义了：
@@ -129,3 +131,88 @@ C-strings:
   * char buffer[7]="Hello!"; // 若为 char buffer[6]="Hello!";则错误
 
 ### 3.4.2 字符指针与字符数组
+
+### 3.4.3 string
+
+### 3.4.5 string 流 (string Streams)
+
+## 3.5 数组 (Arrays)
+
+格式：类型名 数组名[常量表达式]; 
+
+常量表达式：值是整数及其子集。
+
+## 3.6 向量 (Vectors)
+
+vector 是向量类型，它是一种对象实体
+
+vector 四种定义方式：
+  * vector<int> a(10); // 定义了10个整数元素的向量，未初始化
+  * vector<int> b(10,1);// 定义了10个整数元素向量，初始值为1
+  * vector<int> c(b); // 使用另一个向量来创建
+  * vector<int> d(b.begin(), b.begin()+3); // 值为b向量中的第0到第2个元素
+
+## 3.7 指针与引用 (Pointers & References)
+
+### 3.7.1 指针 (Pointers)
+
+指针定义形式：* 可以居左、居右、居中
+
+int iCount=18;
+
+int* ip=&iCount; 
+
+“&” 表示获取实体的地址
+
+float f =34.5
+
+int* ip=&f // 错: float地址不能赋给int指针 
+
+int* ip=123456;// error: 不能进行 int 到 int*的直接转换
+
+int* sp=reinterpret_cast<int*>(123456); // ok
+
+数组名本身就是表示元素类型的地址
+
+int arr[6];
+
+int* ip=arr
+
+
+指针的增减是以该类型的实体大小为单位的。
+
+### 3.7.4 指针限定 (Pointers Restrictions)
+
+指针的常量性：
+  * 指针常量 (constant pointer): 指向的地址值不能修改的指针
+  * 常量指针 (pointer to constant): 指向常量的指针，指向的常量值不能修改
+
+<img src="./img/c++指针的区别.png"/>
+
+```
+  const int a=78;
+  int b=10;
+  int c=18;
+
+  const int* ip=&a; // const 修饰指向的实体类型-常量指针（pointer to constant）
+  int* const cp=&b; // const 修饰指针*cp - 指针常量（constant pointer）
+  int const* dp=&b; // 指针常量
+
+  *ip=87; // 错： 常量指针不能修改指向的常量
+  ip=&c; // ok: 常量指针可以修改指针值
+  *cp=81; // ok: 指针常量可以修改指向的实体
+  cp=&b; // 错： 指针常量不能修改指针值。
+```
+
+
+### 3.7.5 引用 (Reference)
+
+从逻辑上理解，引用是个别名(alias)
+
+引用是个隐性指针
+
+引用定义是必须初始化
+
+int someInt=5
+
+int& rInt=someInt;
