@@ -1,5 +1,5 @@
 #include"abc.h"
 
 int main(){
-  f1();
+  a1::f1();
 }
