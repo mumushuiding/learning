@@ -5,7 +5,7 @@
       "label": "build hello world",
       "type": "shell",
       "command": "g++",
-      "args": ["-g", "-o", "a.exe", "数据结构/chapter_2/example/f0203.cpp"],
+      "args": ["-g", "-o", "a.exe", "数据结构/chapter_5/example/f0509.cpp"],
       "group": {
         "kind": "build",
         "isDefault": true
