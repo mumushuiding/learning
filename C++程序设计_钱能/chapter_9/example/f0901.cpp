@@ -8,7 +8,7 @@ struct Spoint
 class Cpoint{
   int x,y;
 public:
-  Cpoint(int ix=0,int iy=0){
+  Cpoint(int ix=1,int iy=3){
     x=ix;
     y=iy;
   }
@@ -18,9 +18,7 @@ public:
 };
 
 int main(){
-  Spoint s={2,3};
-  Cpoint c(4,5);
-  cout<<s.x<<endl;
+  Cpoint c;
   c.print(c);
 
 }

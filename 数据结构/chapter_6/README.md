@@ -34,9 +34,48 @@
       * 右儿子为 2i+1
       * 左兄弟为i-1 (i为奇数)
       * 右兄弟为i+1 (i为偶数)
-  * 二叉数的结点度表示: 所有结点依其后序列表排列，并附加0~3表示结点的状态。
-  * 用指针实现二叉数：每个结点设置指向左、右儿子结点的指针。
+  * 二叉数的结点度表示: 所有结点依其后序列表排列，并附加0~3表示结点的状态,0为叶节点，1为只有一个左儿子，2为只有一个右儿子，3为有两个儿子。
+  * 用指针实现二叉数
+    * 指针类型： typedef struct btnode *btlink
+    * 结点结构：
+
+    ```
+
+
+    ```
+   * 新建结点：
+
+   ```
+   btlink NewNode() {
+     return (btlink)malloc(sizeof(Btnode));
+   }
+   ```
+
+   * 二叉树结构：
+  
+   ```
+   typedef struct binarytree *BinaryTree;
+   typedef struct binarytree{
+     btlink root;// 树根
+   }Btree;
+   BinaryTree BinaryInit(){
+     BinaryTree T=(BinaryTree)malloc(sizeof *T);
+     T->root=0;
+     return T;
+   }
+   ```
   * 线索二叉数：在指针实现二叉树时，添加左右线索标志leftThread、rightThread
+    * 结点结构：
+
+      ```
+      struct tbtnode{
+        TreeItem element;
+        btlink left; // 左子树
+        btlink right; // 右子树
+        int leftThread; // 左线索标志,为0时指向左儿子结点,为1时指向前驱结点的左线索 
+        int rightThread; // 右线索标志,为0时指向右儿子结点,为1时指向后继结点的右线索
+      }ThreadedNode;
+      ```
     * 左线索：
       * 为0时 left 指针指向左儿子
       * 为1时 left 指向前驱结点
@@ -45,6 +84,16 @@
       * 为1时 right 指向后继结点
   * 二叉搜索树：
     * 适用范围： 存储有序集，如字典
+    * 结构:
+
+      ```
+      struct btnode{
+        TreeItem element;
+        btlink left; // 左子树
+        btlink right; // 右子树
+        btlink parent; // 父结点指针
+      }Btnode;
+      ```
     * 运算：
       * 插入运算 Insert(x,S): 找到一个空指针就插入
       * 删除运算 Delete(x,S)
@@ -63,13 +112,26 @@
   * 线段树：
     * 适用范围：用于解决与矩形相关的计算几何问题
     * 结构：
-      * left 标准线段左端
-      * right 标准线段右端
-      * count 正则覆盖计数: 结点v被线段[l,r]正则覆盖，即[v.left,v.right]⊆[l,r],且v的父结点不被覆盖
-      * clq 其他用户信息
+
+    ```
+    struct stnode{
+      int left; //标准线段左端
+      int right;//标准线段右段
+      int count;//正则覆盖计数
+    }
+    ```
+  * 序列数：
+    * 适用范围：用于解决与序列有关的计算问题
+    * 结点类型定义：
+    
+    ```
+    struct seqnode{
+      int left;//标准子序列左端
+      int right;//标准子序列右端
+      int sum;//标准子序列和
+      int min;//标准子序列最小值
+      int max;//标准子序列最大值
+    }Sqnode;
+    ```
 
 
-
-理解线段树结构及适用范围
-
-掌握序列树结构及其适用范围
