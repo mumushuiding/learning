@@ -1,53 +1,25 @@
-# 第10章 继承 (Inheritance)
+# 高级编程
+<img src="./../img/C++高级编程.png"/>
+## 第10章 继承 (Inheritance)
 
 继承：类之间的上下级关系
 
-继承：就是让子类继承父类public和 protected属性和操作，子类可以声明新的属性和操作。
+继承：
+  * 子类继承父类public和 protected属性和操作
+  * 子类可以声明新的属性和操作。
+  * 子类也称派生类或超类，它有更多的数据和操作
 
-继承类型：
-  * 公有继承 public： 只能访问公有和保护的属性和操作
-  * 保护继承 protected: 基类的 public 变成 protected , protected 保护不变
-  * 私有继承 private: 基类的公有和保护属性和操作都变成子类私有的，它的派生类无法继承
+派生类继承的方式是： class B:public BaseClass{...};
 
-基类也称超类
+访问控制：
+  * public 公有：所有public方法和属性外界都能访问
+  * protected 保护：protected方法和属性只有自身和派生类可以访问
+  * private 私有：private 属性和方法只有自身可以访问
 
-派生类也称子类
-
-
-
-## 10.1 继承结构 (Inheritance Structure)
-
-### 10.1.1 类层次结构 (Class Hierarchy Structure)
-
-### 10.1.2 派生类对象结构 (Derived Object Structure)
-
-派生类继承的方式是： class B:public BaseClass{};
-
-## 10.2 访问父类成员 (Access Father's Member)
-
-### 10.2.1 继承父类成员 (Inherit Father's Member)
-
-protected 访问控制符：保护成员不能进行公共访问，但可以被类内部的成员函数访问。
-
-### 类内访问控制 (Access Control in Class)
-
-## 10.3 派生类的构造 (Constructing Derived Classes)
-
-### 10.3.1 默认构造 (Default Construction)
-
-派生类若未定义构造函数，会挂靠默认的无参构造函数
-
-派生类的默认无参构造函数会首先调用父类的无参构造函数。
-
-若父类定义了有参构造函数（因此没有默认无参构造函数），又没有重载定义无参构造函数，会编译错误。
-
-### 10.3.2 自定义构造 (User-Defined Construction)
-
-可以在派生类的构造函数中规定调用基类构造函数的形式。
-
-### 10.3.3 拷贝构造与赋值 (Copy Construction & Assignment)
-
-### 10.3.4 对象构造顺序 (Object Constructing Order)
+派生类构造：
+  * 若未声明构造函数，会调用父类的默认构造函数(含带默认参数的构造函数)
+  * 既无默认构造函数也无重载会报错
+  * 可在派生类的构造函数中规定调用基类构造函数的形式
 
 对象构造顺序：
   * 先调用基类的构造函数
@@ -55,50 +27,21 @@ protected 访问控制符：保护成员不能进行公共访问，但可以被�
   * 构造对象成员 （若有多个对象，按声明顺序）
   * 调用自身的构造函数体
 
-## 10.4 继承方式 (Inheritance Mode)
+继承方式：
+  * 公有继承 public： 访问控制属性不变
+  * 保护继承 protected: 基类的 public 变成 protected
+  * 私有继承 private: 基类的公有和保护属性和操作都变成子类私有的，子类的派生类无法继承
 
-### 10.4.1 继承访问控制 (Inheriting Access Control)
+多重继承
+  * 一个类从多个基类派生
 
-### 10.4.2 调整访问控制 (Adjusting Access Control)
+基类成员名冲突
+  * 多个基类有相同成员名称
+  * 需要在相同成员名称前添加前缀以说明基类
 
-## 10.5 继承与组合 (Inheritance & Composition)
-
-### 10.5.1 对象结构 (Object Structure)
-
-组合 (composition): 类含有对象成员
-
-### 10.5.2 性质差异 (Character Differentiation)
-
-### 10.5.3 对象分析 (Object Analysis)
-
-### 10.5.4 继承设计 (Inheritance Design)
-
-## 10.6 多继承概念 (Multi-Inheritance Concept)
-
-### 10.6.1 多继承结构 (Multi-Inheritance Structure)
-
-多重继承： 一个类从多个基类派生
-
-### 10.6.2 基类成员名冲突 (Base-Class Member Name Collision)
-
-多继承时，基类属性名冲突时,需在冲突名称前缀以说明基类：
-
-```
-int main() {
-  SleeperSofa ss;
-  ss.Sofa::setWeight(20);
-}
-```
-
-### 10.6.3 基类分解 (Base-Class Decomposition)
-
-## 10.7 多继承技术 (Multi-Inheritance Techonology)
-
-### 10.7.1 虚拟继承 (Virtual Inheritance)
-
-例如B1、B2继承A,而C多重继承B1、B2,如果普通继承则C包含两份A的拷贝，分别来自于B1、B2,而虚拟继承只包含一份A的拷贝。
-
-### 多继承对象构造顺序 (Multi-Inheritance Object Constructing Order)
+虚拟继承：
+  * 形式： class Bed: virtual public Furniture{...}
+  * 被多个子类虚继承的基类只生成一个实例
 
 多继承的构造函数被调用顺序:
   * 虚拟基类
@@ -106,9 +49,29 @@ int main() {
   * 成员对象
   * 类自身
 
+## 第12章 多态 (Polymorphism)
 
+多态
+  * 定义：操作随着所传递对象类型的不同做出不同的反应
+  * 实现：在基类中对需要多态的操作标记上virtual,如：virtual void fn(){...}
+  * 限制：
+    * 仅对于指针和引用才会发生多态现象
+    * 子类的虚函数必须与基类一模一样
+    * 静态成员函数、内联函数和构造函数不能是虚函数
+    * 析构函数通常声明为虚函数
+  * 传播：虚函数会自动地从基类传播下去，故子类中 virtual 标记可以省略。
+  * 类型转换：
+    * 动态转型 dynamic_cast：将基类指针转换成子类指针，如：p=dynamic_cast<SubClass*>(baseClass)
+    * 静态转型 static_cast: 只要是相关类型的转换，都可以操作
+    * 常量转型 const_cast: 解除常量写操作的禁令
 
+## 第13章 抽象类 (Abstract class)
 
+抽象类:
+  * 定义：在类定义中至少存在一个纯虚函数，virtual void display()=0;
+  * 不允许有实例对象
+  * 析构函数无法设计成纯虚函数，因为父子析构函数的名字不同。
 
-
+手柄类：
+  * 目的：专门用于处理有多态表现指针的释放
 
